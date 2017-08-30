@@ -1,0 +1,52 @@
+<header>
+    <!-- Bootstrap core CSS -->
+    <link href="../public/css/bootstrap.min.css" rel="stylesheet">
+</header>
+
+
+<div class="col-md-6">
+    <form action="/create" class="form" role="form" autocomplete="off" id="formCreatePoll" method="post">
+        <div class="form-group">
+            <label for="question">Question: </label>
+            <input type="text" class="form-control" name="question" id="question" required=>
+        </div>
+        <div class="form-group" id="choicesGroup">
+            <label>Choices: </label>
+            <input type="text" class="form-control choice" name="choice0" id="choice0" required>
+            <input type="text" class="form-control choice" name="choice1" id="choice1" required>
+            <input type="text" class="form-control choice" name="choice2" id="choice2">
+
+
+        </div>
+        <button type="submit" class="btn btn-info float-right">Create</button>
+        <button type="submit" class="btn btn-success float-right" id="addChoice">+</button>
+    </form>
+</div>
+
+<script type="text/javascript" src="../public/js/jquery-3.2.1.slim.min.js"></script>
+<script type="text/javascript" src="../public/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+    const addChoiceBtn = document.querySelector("#addChoice");
+    const choicesGroup = document.querySelector("#choicesGroup");
+    const MAX_CHOICE_NUM = 5;
+    var currentChoiceNum = 3;
+    addChoiceBtn.addEventListener("click", function(event) {
+        event.preventDefault();
+
+        if (currentChoiceNum === MAX_CHOICE_NUM) {
+            return alert("You can only have max. 5 choices for a poll");
+        }
+        // choice2 is to be cloned because it doesn't have the "required" attribute
+        var someChoice = document.querySelector("#choice2");
+        var newChoice = someChoice.cloneNode();
+
+        // newChoice has to be modified to avoid duplicate data being sent to server
+        newChoice.setAttribute("name", "choice" + currentChoiceNum);
+        newChoice.id = "choice" + currentChoiceNum;
+
+        // draw the newChoice on screen
+        choicesGroup.appendChild(newChoice);
+        // currentChoiceNum is to be increased by 1, so that the next newChoice can have the right attribute
+        currentChoiceNum++;
+    });
+</script>
