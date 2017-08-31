@@ -30,6 +30,8 @@ app.engine("hbs", handlebars({"extname": ".hbs", "layoutsDir": "views/layouts", 
 
 // init static directory
 app.use("/public", express.static(path.join(process.cwd(), "public")));
+app.use("/app/common", express.static(path.join(process.cwd(), "app", "common")));
+app.use("/app/controlers", express.static(path.join(process.cwd(), "app", "controlers")));
 
 // init cookieParser
 app.use(cookieParser("secretStr1ngT0encryptC00kl3s"));
