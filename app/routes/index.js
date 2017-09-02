@@ -39,7 +39,7 @@ module.exports = function(app, passport) {
                     res.redirect("/register");
                 } else {
                     req.flash("success", "Successfully registered! You can now login.");
-                    res.render("login");
+                    res.redirect("/login");
                 }
             });
         });
@@ -65,7 +65,8 @@ module.exports = function(app, passport) {
         if (req.isAuthenticated()) {
             return next();
         } else {
-            res.render("login");
+            req.flash("error", "Not authenticated");
+            res.redirect("/login");
         }
     }
 };
