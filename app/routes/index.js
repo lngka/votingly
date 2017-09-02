@@ -40,6 +40,15 @@ module.exports = function(app, passport) {
                 }
             });
         });
+
+    app.route("/create")
+        .get(function(req, res) {
+            res.render("create");
+        })
+        .post(function(req, res) {
+            console.log(req.body);
+            res.send(req.body);
+        });
     function checkAuthentication(req, res, next){
         if (req.isAuthenticated()) {
             return next();

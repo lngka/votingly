@@ -5,48 +5,22 @@
 
 
 <div class="col-md-6">
-    <form action="/create" class="form" role="form" autocomplete="off" id="formCreatePoll" method="post">
+    <form class="form" role="form" autocomplete="off" id="formCreatePoll" method="post">
         <div class="form-group">
             <label for="question">Question: </label>
-            <input type="text" class="form-control" name="question" id="question" required=>
+            <input type="text" class="form-control" name="question" id="question" placeholder="e.g. what's the best language?" required=>
         </div>
         <div class="form-group" id="choicesGroup">
             <label>Choices: </label>
-            <input type="text" class="form-control choice" name="choice0" id="choice0" required>
-            <input type="text" class="form-control choice" name="choice1" id="choice1" required>
-            <input type="text" class="form-control choice" name="choice2" id="choice2">
-
-
+            <input type="text" class="form-control choice" name="choice0" id="choice0" placeholder="A. Vietnamese" required>
+            <input type="text" class="form-control choice" name="choice1" id="choice1" placeholder="B. Vietnamese" required>
+            <input type="text" class="form-control choice" name="choice2" id="choice2" placeholder="C. Vietnamese" >
         </div>
-        <button type="submit" class="btn btn-info float-right">Create</button>
-        <button type="submit" class="btn btn-success float-right" id="addChoice">+</button>
+        <button type="submit" id="submitBtn" class="btn btn-info float-right">Create</button>
+        <button class="btn btn-success float-right" id="addChoice">+</button>
     </form>
 </div>
 
-<script type="text/javascript" src="../public/js/jquery-3.2.1.slim.min.js"></script>
-<script type="text/javascript" src="../public/js/bootstrap.min.js"></script>
-<script type="text/javascript">
-    const addChoiceBtn = document.querySelector("#addChoice");
-    const choicesGroup = document.querySelector("#choicesGroup");
-    const MAX_CHOICE_NUM = 7;
-    var currentChoiceNum = 3;
-    addChoiceBtn.addEventListener("click", function(event) {
-        event.preventDefault();
-
-        if (currentChoiceNum === MAX_CHOICE_NUM) {
-            return alert("You can only have max. 7 choices for a poll");
-        }
-        // choice2 is to be cloned because it doesn't have the "required" attribute
-        var someChoice = document.querySelector("#choice2");
-        var newChoice = someChoice.cloneNode();
-
-        // newChoice has to be modified to avoid duplicate data being sent to server
-        newChoice.setAttribute("name", "choice" + currentChoiceNum);
-        newChoice.id = "choice" + currentChoiceNum;
-
-        // draw the newChoice on screen
-        choicesGroup.appendChild(newChoice);
-        // currentChoiceNum is to be increased by 1, so that the next newChoice can have the right attribute
-        currentChoiceNum++;
-    });
-</script>
+<script type="text/javascript" src="/app/common/ajaxFunctions.js"></script>
+<script type="text/javascript" src="/app/controllers/create.addEmptyChoice.client.js"></script>
+<script type="text/javascript" src="/app/controllers/create.sendRequest.client.js"></script>

@@ -1,4 +1,7 @@
-function ajaxRequest (method, url, callback) {
+
+/* eslint-disable no-unused-vars*/
+// ajaxSendJSON is imported and used in create.addEmptyChoice.client.js
+function ajaxSendJSON (method, url, requestObj, callback) {
     var xmlhttp = new XMLHttpRequest();
 
     xmlhttp.onreadystatechange = function () {
@@ -6,9 +9,9 @@ function ajaxRequest (method, url, callback) {
             callback(xmlhttp.response);
         }
     };
-
+    console.log(arguments);
+    // XMLHttpRequest.open(method, url, async)
     xmlhttp.open(method, url, true);
-    xmlhttp.send();
+    xmlhttp.setRequestHeader("Content-Type", "application/json; charset=UTF-8");
+    xmlhttp.send(JSON.stringify(requestObj));
 }
-
-module.exports = ajaxRequest;

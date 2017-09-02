@@ -31,7 +31,7 @@ app.engine("hbs", handlebars({"extname": ".hbs", "layoutsDir": "views/layouts", 
 // init static directory
 app.use("/public", express.static(path.join(process.cwd(), "public")));
 app.use("/app/common", express.static(path.join(process.cwd(), "app", "common")));
-app.use("/app/controlers", express.static(path.join(process.cwd(), "app", "controlers")));
+app.use("/app/controllers", express.static(path.join(process.cwd(), "app", "controllers")));
 
 // init cookieParser
 app.use(cookieParser("secretStr1ngT0encryptC00kl3s"));
@@ -56,6 +56,7 @@ configPassport(passport);
  * and exposes the resulting object (containing the keys and values) on req.body
  */
 app.use(bodyParser.urlencoded({"extended": true}));
+app.use(bodyParser.json());
 
 // init flash messages
 app.use(function(req, res, next) {
