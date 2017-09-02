@@ -15,7 +15,7 @@ const mySchema = new Schema({
             "default": 0
         }
     }],
-    "participant": {
+    "participants": {
         "type": Array,
         "default": []
     }

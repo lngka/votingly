@@ -1,4 +1,5 @@
 const User = require("../models/users.js");
+const Poll = require("../models/polls.js");
 
 module.exports = function(app, passport) {
     app.route("/")
@@ -32,11 +33,13 @@ module.exports = function(app, passport) {
             var username = req.body.username;
             var email = req.body.email;
             var password = req.body.password;
-            User.createNewUser(username, password, email, function(err, user) {
+            User.createNewUser(username, password, email, function(err) {
                 if (err) {
-                    res.send(err);
+                    req.flash("error", err.message);
+                    res.redirect("/register");
                 } else {
-                    res.json(user);
+                    req.flash("success", "Successfully registered! You can now login.");
+                    res.render("login");
                 }
             });
         });
@@ -46,9 +49,17 @@ module.exports = function(app, passport) {
             res.render("create");
         })
         .post(function(req, res) {
-            console.log(req.body);
-            res.send(req.body);
+            var formData = req.body;
+
+            Poll.createNewPoll(formData, function(err, newPoll) {
+                if (err) {
+                    res.status(500).send("Error creating new poll by polls.js");
+                } else {
+                    res.status(200).send(newPoll);
+                }
+            });
         });
+
     function checkAuthentication(req, res, next){
         if (req.isAuthenticated()) {
             return next();

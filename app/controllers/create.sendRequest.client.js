@@ -40,9 +40,8 @@ submitBtn.addEventListener("click", function(event) {
     // send the request
     var url = window.location.origin + "/create";
     /*eslint-disable no-undef*/
-    // ajaxSendJSON is defined in app\common\ajaxFunctions.js
+    // nonAjaxSendJSON is defined in app\common\nonAjaxFunctions.js
     ajaxSendJSON("POST", url, requestObj, function(response) {
-        console.log(response);
-        return;
+        document.write(response);
     });
 });

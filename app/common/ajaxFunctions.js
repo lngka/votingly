@@ -9,7 +9,6 @@ function ajaxSendJSON (method, url, requestObj, callback) {
             callback(xmlhttp.response);
         }
     };
-    console.log(arguments);
     // XMLHttpRequest.open(method, url, async)
     xmlhttp.open(method, url, true);
     xmlhttp.setRequestHeader("Content-Type", "application/json; charset=UTF-8");
