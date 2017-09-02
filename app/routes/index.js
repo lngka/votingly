@@ -61,6 +61,21 @@ module.exports = function(app, passport) {
             });
         });
 
+    app.route("/poll/:pollID")
+        .get(function(req, res) {
+            const pollID = req.params.pollID;
+            Poll.getPollByID(pollID, function(err, poll) {
+                if (err) {
+                    req.flash("error", err.message);
+                    res.redirect("/");
+                } else if (!poll) {
+                    res.status(404).send("Poll not found");
+                } else {
+                    res.json(poll);
+                }
+            });
+        });
+
     function checkAuthentication(req, res, next){
         if (req.isAuthenticated()) {
             return next();
