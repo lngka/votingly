@@ -51,9 +51,10 @@ module.exports = function(app, passport) {
         .post(function(req, res) {
             var formData = req.body;
 
-            Poll.createNewPoll(formData, function(err, newPoll) {
+            Poll.createNewPoll(formData, req.user, function(err, newPoll) {
                 if (err) {
-                    res.status(500).send("Error creating new poll by polls.js");
+                    req.flash("error", err.message);
+                    res.redirect("/create");
                 } else {
                     res.status(200).send(newPoll);
                 }
