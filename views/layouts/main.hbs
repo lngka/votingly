@@ -9,9 +9,9 @@
     <title>Vote the heck out of it!</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="public/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/public/css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom styles for this template -->
-    <link href="public/css/main.css" rel="stylesheet">
+    <link href="/public/css/main.css" rel="stylesheet">
   </head>
 
   <body>
@@ -35,7 +35,7 @@
                 <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Menu</a>
                 <div class="dropdown-menu" aria-labelledby="dropdown01">
                   <a class="dropdown-item" href="/create">Create new poll</a>
-                  <a class="dropdown-item" href="#">Another action</a>
+                  <a class="dropdown-item" href="/mypolls">My polls</a>
                   <a class="dropdown-item" href="#">Something else here</a>
                 </div>
               </li>
@@ -55,7 +55,7 @@
       </div>
     </nav>
 
-    <div class="container col-12">
+    <div class="container-fluid">
         {{#if error }}
             <div class="alert alert-danger fade show">
             <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
@@ -82,9 +82,8 @@
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="public/js/jquery-3.2.1.slim.min.js"></script>
-    <script src="public/js/tether.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
-    <script src="public/js/bootstrap.min.js"></script>
+    <script src="/public/js/jquery-3.2.1.slim.min.js"></script>
+    <script src="/public/js/tether.min.js"></script>
+    <script src="/public/js/bootstrap.min.js"></script>
   </body>
 </html>

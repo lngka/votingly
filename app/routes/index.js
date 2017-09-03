@@ -45,7 +45,7 @@ module.exports = function(app, passport) {
         });
 
     app.route("/create")
-        .get(function(req, res) {
+        .get(checkAuthentication, function(req, res) {
             res.render("create");
         })
         .post(function(req, res) {
@@ -62,21 +62,27 @@ module.exports = function(app, passport) {
         });
 
     app.route("/poll/:pollID")
-        .get(function(req, res) {
+        .get(checkAuthentication, function(req, res) {
             const pollID = req.params.pollID;
             Poll.getPollByID(pollID, function(err, poll) {
                 if (err) {
                     req.flash("error", err.message);
                     res.redirect("/");
                 } else {
-                    res.json(poll);
+                    // options contains varibles to be passed to handlebars
+                    var options = {
+                        "question": poll.question,
+                        "author": poll.author,
+                        "answers": poll.answers
+                    };
+                    res.render("poll", options);
                 }
             });
         });
 
-    app.route("/mypoll/:userID")
-        .get(function(req, res) {
-            const userID = req.params.userID;
+    app.route("/mypolls")
+        .get(checkAuthentication, function(req, res) {
+            const userID = req.user.id;
             Poll.getPollByUserID(userID, function(err, polls) {
                 if (err) {
                     req.flash("error", err.message);
@@ -88,7 +94,6 @@ module.exports = function(app, passport) {
         });
 
     function checkAuthentication(req, res, next){
-        console.log("auch auch");
         if (req.isAuthenticated()) {
             return next();
         } else {
