@@ -68,15 +68,27 @@ module.exports = function(app, passport) {
                 if (err) {
                     req.flash("error", err.message);
                     res.redirect("/");
-                } else if (!poll) {
-                    res.status(404).send("Poll not found");
                 } else {
                     res.json(poll);
                 }
             });
         });
 
+    app.route("/mypoll/:userID")
+        .get(function(req, res) {
+            const userID = req.params.userID;
+            Poll.getPollByUserID(userID, function(err, polls) {
+                if (err) {
+                    req.flash("error", err.message);
+                    res.redirect("/");
+                } else {
+                    res.json(polls);
+                }
+            });
+        });
+
     function checkAuthentication(req, res, next){
+        console.log("auch auch");
         if (req.isAuthenticated()) {
             return next();
         } else {

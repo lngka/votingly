@@ -43,7 +43,7 @@ module.exports.createNewPoll = function(formData, user, callback) {
     }
 
     var newPoll = new Poll(formData);
-    newPoll.createdByID = user.id;
+    newPoll.author = user.id;
     newPoll.save(function(err, poll) {
         if (err) {
             return callback(err, null);
@@ -61,8 +61,28 @@ module.exports.getPollByID = function(pollID, callback) {
     Poll.findById(pollID, function(err, poll) {
         if (err) {
             return callback(err, null);
-        } else {
+        } else if(!poll) { // When there are no matches find() returns [], while findOne() & findById() returns null
+            var newError = new Error("No poll found");
+            return callback(newError, null);
+        }else {
             return callback(null, poll);
+        }
+    });
+};
+
+/*
+* @param userID {string}: the string presentation of ObjectID, error if string can not be casted to objectID
+* @callback {function}: called after check with the following parameters: err, poll
+*/
+module.exports.getPollByUserID = function(userID, callback) {
+    Poll.find({"author": userID}, function(err, polls) {
+        if (err) {
+            return callback(err, null);
+        } else if(polls.length === 0){// When there are no matches find() returns [], while findOne() & findById() returns null
+            var newError = new Error("No poll found");
+            return callback(newError, null);
+        } else {
+            return callback(null, polls);
         }
     });
 };
