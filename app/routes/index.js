@@ -3,8 +3,13 @@ const Poll = require("../models/polls.js");
 
 module.exports = function(app, passport) {
     app.route("/")
-        .get(checkAuthentication, function(req, res){
-            res.render("home");
+        .get(function(req, res){
+            // checkAuthentication middleware not used to avoid unnecessary flash message to user
+            if (!req.isAuthenticated()) {
+                res.render("login");
+            } else {
+                res.render("home");
+            }
         });
 
     app.route("/login")
@@ -51,12 +56,13 @@ module.exports = function(app, passport) {
         .post(function(req, res) {
             var formData = req.body;
 
-            Poll.createNewPoll(formData, req.user, function(err, newPoll) {
+            Poll.createNewPoll(formData, req.user, function(err) {
                 if (err) {
                     req.flash("error", err.message);
                     res.redirect("/create");
                 } else {
-                    res.status(200).send(newPoll);
+                    req.flash("success", "New poll created!!");
+                    res.redirect("/create");
                 }
             });
         });
@@ -88,7 +94,7 @@ module.exports = function(app, passport) {
                     req.flash("error", err.message);
                     res.redirect("/");
                 } else {
-                    res.json(polls);
+                    res.render("mypolls", {polls});
                 }
             });
         });

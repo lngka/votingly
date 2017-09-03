@@ -1,0 +1,11 @@
+
+
+<div class="card">
+    {{#each polls}}
+    <a href="{{this.pollURL}}">
+        <div class="card-block">
+          <p class="card-text">{{this.question}} <span class="badge badge-info">Vote count: {{this.participants.length}}</span></p>
+        </div>
+    </a>
+    {{/each}}
+</div>

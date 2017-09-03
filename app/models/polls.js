@@ -22,6 +22,10 @@ const mySchema = new Schema({
     "participants": {
         "type": Array,
         "default": []
+    },
+    "pollURL": {
+        "type": String,
+        "default": ""
     }
 });
 
@@ -44,6 +48,9 @@ module.exports.createNewPoll = function(formData, user, callback) {
 
     var newPoll = new Poll(formData);
     newPoll.author = user.id;
+    // a poll is viewed by calling /poll/:pollID from browser
+    newPoll.pollURL = process.env.APP_URL + "poll/" + newPoll.id;
+
     newPoll.save(function(err, poll) {
         if (err) {
             return callback(err, null);
