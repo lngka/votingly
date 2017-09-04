@@ -2,10 +2,15 @@
 
 <div class="card">
     {{#each polls}}
-    <a href="{{this.pollURL}}">
+
         <div class="card-block">
-          <p class="card-text">{{this.question}} <span class="badge badge-info">Vote count: {{this.participants.length}}</span></p>
+          <a href="{{this.pollURL}}"><p class="card-text">{{this.question}}</p></a>
+          <span class="badge badge-info">Vote count: {{this.participants.length}}</span>
+          <span><a href="{{this.removeURL}}"><span class="badge badge-danger">DELETE</span></a></span>
         </div>
-    </a>
+
+
+
+
     {{/each}}
 </div>

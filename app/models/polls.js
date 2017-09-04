@@ -26,6 +26,10 @@ const mySchema = new Schema({
     "pollURL": {
         "type": String,
         "default": ""
+    },
+    "removeURL": {
+        "type": String,
+        "default": ""
     }
 });
 
@@ -48,8 +52,12 @@ module.exports.createNewPoll = function(formData, user, callback) {
 
     var newPoll = new Poll(formData);
     newPoll.author = user.id;
+
     // a poll is viewed by calling /poll/:pollID from browser
     newPoll.pollURL = process.env.APP_URL + "poll/" + newPoll.id;
+
+    // a poll is deleted by calling /remove/:pollID from browser
+    newPoll.removeURL = process.env.APP_URL + "remove/" + newPoll.id;
 
     newPoll.save(function(err, poll) {
         if (err) {
@@ -101,8 +109,6 @@ module.exports.getPollByUserID = function(userID, callback) {
 */
 module.exports.deletePollByID = function(pollID, callback) {
     Poll.remove({"_id": pollID}, function(err) {
-        if (err) {
-            return callback(err, null);
-        }
+        return callback(err);
     });
 };

@@ -62,7 +62,7 @@ module.exports = function(app, passport) {
                     res.redirect("/create");
                 } else {
                     req.flash("success", "New poll created!!");
-                    res.redirect("/create");
+                    res.redirect("/mypolls");
                 }
             });
         });
@@ -89,24 +89,24 @@ module.exports = function(app, passport) {
     app.route("/remove/:pollID")
         .get(checkAuthentication, function(req, res) {
             const pollID = req.params.pollID;
-            console.log(pollID);
             Poll.getPollByID(pollID, function(err, poll) {
-                console.log(poll.author);
-                console.log(req.user.id);
                 if (err) {
-                    res.json(err);
-                } else if (poll.author == req.user.id) {
+                    return res.json(err);
+                }
+                // prevent deletion of other's user's polls
+                if (poll.author != req.user.id) {
+                    req.flash("error", "Not authorized to delete");
+                    return res.redirect("/mypolls");
+                } else {
                     Poll.deletePollByID(pollID, function(err) {
                         if (err) {
                             req.flash("error", "Internal error, could not delete poll");
-                            res.redirect("/mypolls");
+                            return res.redirect("/mypolls");
+                        } else {
+                            req.flash("success", "Poll deleted");
+                            return res.redirect("/mypolls");
                         }
-                        req.flash("success", "Poll deleted");
-                        res.redirect("/mypolls");
                     });
-                } else {
-                    req.flash("error", "Not authorized to delete");
-                    res.redirect("/mypolls");
                 }
             });
         });
@@ -120,6 +120,17 @@ module.exports = function(app, passport) {
                     res.redirect("/");
                 } else {
                     res.render("mypolls", {polls});
+                }
+            });
+        });
+    app.route("/allpolls")
+        .get(checkAuthentication, function(req, res) {
+            Poll.find({}, function(err, polls) {
+                if (err) {
+                    req.flash("error", err.message);
+                    res.redirect("/");
+                } else {
+                    res.render("allPolls", {polls});
                 }
             });
         });
