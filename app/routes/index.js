@@ -86,6 +86,31 @@ module.exports = function(app, passport) {
             });
         });
 
+    app.route("/remove/:pollID")
+        .get(checkAuthentication, function(req, res) {
+            const pollID = req.params.pollID;
+            console.log(pollID);
+            Poll.getPollByID(pollID, function(err, poll) {
+                console.log(poll.author);
+                console.log(req.user.id);
+                if (err) {
+                    res.json(err);
+                } else if (poll.author == req.user.id) {
+                    Poll.deletePollByID(pollID, function(err) {
+                        if (err) {
+                            req.flash("error", "Internal error, could not delete poll");
+                            res.redirect("/mypolls");
+                        }
+                        req.flash("success", "Poll deleted");
+                        res.redirect("/mypolls");
+                    });
+                } else {
+                    req.flash("error", "Not authorized to delete");
+                    res.redirect("/mypolls");
+                }
+            });
+        });
+
     app.route("/mypolls")
         .get(checkAuthentication, function(req, res) {
             const userID = req.user.id;

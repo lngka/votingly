@@ -93,3 +93,16 @@ module.exports.getPollByUserID = function(userID, callback) {
         }
     });
 };
+
+/*
+* @param pollID {string}: the string presentation of ObjectID, error if string can not be casted to objectID
+* @callback {function}: called after check with the following parameters: err
+* if no err returned then the poll matching id is removed
+*/
+module.exports.deletePollByID = function(pollID, callback) {
+    Poll.remove({"_id": pollID}, function(err) {
+        if (err) {
+            return callback(err, null);
+        }
+    });
+};
