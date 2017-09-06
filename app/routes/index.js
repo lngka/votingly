@@ -79,7 +79,8 @@ module.exports = function(app, passport) {
                     var options = {
                         "question": poll.question,
                         "author": poll.author,
-                        "answers": poll.answers
+                        "answers": poll.answers,
+                        "pollID": pollID
                     };
                     res.render("poll", options);
                 }
@@ -123,6 +124,7 @@ module.exports = function(app, passport) {
                 }
             });
         });
+
     app.route("/allpolls")
         .get(checkAuthentication, function(req, res) {
             Poll.find({}, function(err, polls) {
@@ -131,6 +133,22 @@ module.exports = function(app, passport) {
                     res.redirect("/");
                 } else {
                     res.render("allPolls", {polls});
+                }
+            });
+        });
+
+    app.route("/vote/:pollID")
+        .get(checkAuthentication, function(req, res) {
+            var userID = req.user.id;
+            var pollID = req.params.pollID;
+            var choiceIndex = req.query.choice;
+            Poll.vote(userID, pollID, choiceIndex, function(err) {
+                if (err) {
+                    req.flash("error", err.message);
+                    return res.redirect("back");
+                } else {
+                    req.flash("success", "It is, like, *your* opinion");
+                    return res.redirect("back");
                 }
             });
         });

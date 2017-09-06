@@ -2,11 +2,11 @@
   <h1 class="display-4">{{question}}</h1>
 
   <p id="author">Created by: {{author}}</p>
-  <form class="form-group" action="#" method="get">
+  <form class="form-group" action="/vote/{{pollID}}" method="get" enctype="application/x-www-form-urlencoded">
       <div class="custom-controls-stacked">
       {{#each answers}}
         <label class="custom-control custom-radio">
-            <input name="radio" type="radio" class="custom-control-input" value="{{@index}}">
+            <input name="choice" type="radio" class="custom-control-input" value="{{@index}}">
             <span class="custom-control-indicator"></span>
             <span class="custom-control-description">{{this.choice}}</span>
         </label>
