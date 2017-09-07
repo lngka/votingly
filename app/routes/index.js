@@ -25,8 +25,14 @@ module.exports = function(app, passport) {
 
     app.route("/auth/anonymous")
         .get(passport.authenticate("anonymous", {
+            // normally anonymous logins are non-persistent according to passport-anonymous.Strategy
+            // Usage of persistent login require a registered user with its own _id in database
             "session": true
         }), function(req, res) {
+            // a user named Anonymous is created beforehand, its ID  saved in .env
+            // this user is granted limited functionality in the app
+            // persistent login for this user require "manual" writting in session.passport object
+            // because Anonymous is logged via this route, NOT through the browser's login form
             req.session.passport = {"user": {"_id": process.env.ANON_USER_ID}};
             req.flash("success", "Logged you in anonymously");
             res.redirect("/");
@@ -123,6 +129,10 @@ module.exports = function(app, passport) {
     app.route("/mypolls")
         .get(checkAuthentication, function(req, res) {
             const userID = req.user.id;
+            if (userID === process.env.ANON_USER_ID) {
+                req.flash("error", "Only for registered user");
+                return res.redirect("/");
+            }
             Poll.getPollByUserID(userID, function(err, polls) {
                 if (err) {
                     req.flash("error", err.message);
