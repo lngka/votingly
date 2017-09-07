@@ -23,6 +23,14 @@ module.exports = function(app, passport) {
             "successFlash": "Welcome!!"
         }));
 
+    app.route("/auth/anonymous")
+        .get(passport.authenticate("anonymous", {
+            "session": true
+        }), function(req, res) {
+            req.session.passport = {"user": {"_id": process.env.ANON_USER_ID}};
+            req.flash("success", "Logged you in anonymously");
+            res.redirect("/");
+        });
     app.route("/logout")
         .get(checkAuthentication, function(req, res) {
             req.logout();

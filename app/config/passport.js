@@ -1,4 +1,7 @@
+"use strict";
+
 const LocalStrategy = require("passport-local").Strategy;
+const AnonymousStrategy = require("passport-anonymous").Strategy;
 const User = require("../models/users.js");
 
 module.exports = function(passport) {
@@ -22,6 +25,8 @@ module.exports = function(passport) {
             });
         }
     ));
+
+    passport.use(new AnonymousStrategy());
 
     passport.serializeUser(function(user, done) {
         done(null, user.id);
