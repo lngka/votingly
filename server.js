@@ -1,18 +1,18 @@
 "use strict";
 
 // requirements
-const express  = require("express");
-const path = require("path");
-const dotenv   = require("dotenv");
-const mongoose = require("mongoose");
-const handlebars = require("express-handlebars");
-const route = require("./app/routes/index.js");
-const bodyParser = require("body-parser");
-const cookieParser = require("cookie-parser");
-const session = require("express-session");
-const passport = require("passport");
+const express        = require("express");
+const path           = require("path");
+const dotenv         = require("dotenv");
+const mongoose       = require("mongoose");
+const handlebars     = require("express-handlebars");
+const route          = require("./app/routes/index.js");
+const bodyParser     = require("body-parser");
+const cookieParser   = require("cookie-parser");
+const session        = require("express-session");
+const passport       = require("passport");
 const configPassport = require("./app/config/passport.js");
-const flash = require("connect-flash");
+const flash          = require("connect-flash");
 
 // init environment
 dotenv.load();
@@ -61,7 +61,7 @@ app.use(bodyParser.json());
 // init flash messages
 app.use(function(req, res, next) {
     // the following error & success flash might be set by passportjs
-    res.locals.error = req.flash("error");
+    res.locals.error   = req.flash("error");
     res.locals.success = req.flash("success");
     // this flash is used to show user general messages
     res.locals.message = req.flash("message");

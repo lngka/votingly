@@ -35,10 +35,11 @@ module.exports = function(app, passport) {
             // because Anonymous is logged via this route, NOT through the browser's login form
             req.session.passport = {"user": {"_id": process.env.ANON_USER_ID}};
             req.flash("success", "Logged you in anonymously");
+            req.flash("message", "But I can't fix your personality");
             res.redirect("/");
         });
     app.route("/logout")
-        .get(checkAuthentication, function(req, res) {
+        .get(function(req, res) {
             req.logout();
             req.flash("message", "Successfully logged out!");
             res.redirect("login");
@@ -156,19 +157,33 @@ module.exports = function(app, passport) {
         });
 
     app.route("/vote/:pollID")
-        .get(checkAuthentication, function(req, res) {
+        .get(checkAuthentication, checkAlreadyVoted, function(req, res) {
             var userID = req.user.id;
             var pollID = req.params.pollID;
             var choiceIndex = req.query.choice;
-            Poll.vote(userID, pollID, choiceIndex, function(err) {
-                if (err) {
-                    req.flash("error", err.message);
-                    return res.redirect("back");
-                } else {
-                    req.flash("success", "It is, like, *your* opinion");
-                    return res.redirect("back");
-                }
-            });
+
+            // if user is anonymous then the vote is saved with IP address instead of userID
+            if (userID == process.env.ANON_USER_ID) {
+                Poll.anonymousVote(req.ip, pollID, choiceIndex, function(err) {
+                    if (err) {
+                        req.flash("error", err.message);
+                        return res.redirect("back");
+                    } else {
+                        req.flash("success", "It is, like, *your* opinion");
+                        return res.redirect("back");
+                    }
+                });
+            } else {
+                Poll.vote(userID, pollID, choiceIndex, function(err) {
+                    if (err) {
+                        req.flash("error", err.message);
+                        return res.redirect("back");
+                    } else {
+                        req.flash("success", "It is, like, *your* opinion");
+                        return res.redirect("back");
+                    }
+                });
+            }
         });
 
     function checkAuthentication(req, res, next){
@@ -177,6 +192,26 @@ module.exports = function(app, passport) {
         } else {
             req.flash("error", "Not authenticated");
             res.redirect("/login");
+        }
+    }
+
+    function checkAlreadyVoted(req, res, next) {
+        var pollID = req.params.pollID;
+        var userID = req.user.id;
+        if (userID == process.env.ANON_USER_ID) {
+            return next();
+        } else {
+            Poll.count({
+                "_id": pollID,
+                "participants": userID
+            }, function(err, count) {
+                if (count) {
+                    req.flash("error", "You already voted on this poll");
+                    res.redirect("back");
+                } else {
+                    next();
+                }
+            });
         }
     }
 };

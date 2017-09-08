@@ -6,7 +6,7 @@
       <div class="custom-controls-stacked">
       {{#each answers}}
         <label class="custom-control custom-radio">
-            <input name="choice" type="radio" class="custom-control-input" value="{{@index}}">
+            <input name="choice" type="radio" class="custom-control-input" value="{{@index}}" required>
             <span class="custom-control-indicator"></span>
             <span class="custom-control-description">{{this.choice}}</span>
         </label>

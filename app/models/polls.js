@@ -35,7 +35,7 @@ const mySchema = new Schema({
 
 // revision of each document is NOT needed
 mySchema.set("versionKey", false);
-// the constant User is exported and also used for other model operations
+// the constant Poll is exported and also used for other model operations
 const Poll = mongoose.model("Poll", mySchema);
 module.exports = Poll;
 
@@ -127,11 +127,44 @@ module.exports.vote = function(userID, pollID, choiceIndex, callback) {
     var whereToVote = "answers" + "." + choiceIndex;
     Poll.findOneAndUpdate({"_id": pollID},
         // Note the square brackets around key. These are called computed property names.
-        //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Object_initializer#Computed_property_names
+        // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Object_initializer#Computed_property_names
         // userID will be saved by the choice they select,and also in the list of "participants", "participants" will be checked to prevent multiple vote per user
         {$push: {
             [whereToVote + ".votedBy"]: userID,
             "participants": userID
+        },
+        $inc: {
+            [whereToVote + ".voteNbr" ]: 1}
+        },
+        function(err) {
+            if (err) {
+                return callback(err, false);
+            } else {
+                return callback(null, true);
+            }
+        }
+    );
+};
+
+/*
+* @param userIP {string}: IP address of Anonymous user
+* @param pollID {string}: the string presentation of ObjectID, error if string can not be casted to objectID
+* @param choiceIndex {number}: the zero-based index position of the selected answer
+* @callback {function}: called after check with the following parameters: err, isDone
+*   @callback-param err {object}: An error instance representing the error during the execution
+*   @callback-param isDone {Boolean}: true if operation succeed
+*/
+module.exports.anonymousVote = function(userIP, pollID, choiceIndex, callback) {
+    // access the choiceIndex-th element of the "answers" array
+    // that is, if choiceIndex is 2 then we need to find and update answers.2
+    var whereToVote = "answers" + "." + choiceIndex;
+    Poll.findOneAndUpdate({"_id": pollID},
+        // Note the square brackets around key. These are called computed property names.
+        // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Object_initializer#Computed_property_names
+        // userID will be saved by the choice they select,and also in the list of "participants", "participants" will be checked to prevent multiple vote per user
+        {$push: {
+            [whereToVote + ".votedBy"]: userIP,
+            "participants": userIP
         },
         $inc: {
             [whereToVote + ".voteNbr" ]: 1}
