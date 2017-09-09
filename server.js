@@ -6,13 +6,16 @@ const path           = require("path");
 const dotenv         = require("dotenv");
 const mongoose       = require("mongoose");
 const handlebars     = require("express-handlebars");
-const route          = require("./app/routes/index.js");
 const bodyParser     = require("body-parser");
 const cookieParser   = require("cookie-parser");
 const session        = require("express-session");
 const passport       = require("passport");
 const configPassport = require("./app/config/passport.js");
 const flash          = require("connect-flash");
+
+// import routers
+const indexRoute = require("./app/routes/index.js");
+const authRoute  = require("./app/routes/auth.js");
 
 // init environment
 dotenv.load();
@@ -75,7 +78,8 @@ app.use(function(req, res, next) {
 });
 
 // routes configuration
-route(app, passport, flash);
+indexRoute(app, passport);
+authRoute(app, passport);
 
 // start app
 var port = process.env.PORT;
