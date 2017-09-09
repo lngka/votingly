@@ -1,6 +1,6 @@
 <div class="jumbotron">
-    <div class="row">
-        <div class="col-6">
+    <div class="row no-gutters">
+        <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
             <p class="display-4">{{question}}</p>
             <p id="author">Created by: {{author}}</p>
             <!-- the id of this form is used in chart.controllers.client.js to query data in order to draw chart-->
@@ -17,7 +17,7 @@
                 <input class="btn btn-success" type="submit" value="Vote">
             </form>
         </div>
-        <div class="col-6">
+        <div class="col-6 col-sm-6 col-md-4 col-lg-4 col-xl-3">
             <canvas id="myChart"></canvas>
         </div>
     </div>

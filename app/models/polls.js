@@ -187,23 +187,30 @@ module.exports.anonymousVote = function(userIP, pollID, choiceIndex, callback) {
 */
 
 module.exports.getResult = function(pollID, callback) {
-    Poll.findById(pollID, function(err, poll) {
-        if (err) {
-            return callback(err, null);
-        } else if(!poll) { // When there are no matches find() returns [], while findOne() & findById() returns null
-            var newError = new Error("No poll found");
-            return callback(newError, null);
-        }else {
-            var result = {
-                "answers": [],
-                "count": []
-            };
 
-            poll.answers.forEach(function(item) {
-                result.answers.push(item.choice);
-                result.count.push(item.voteNbr);
-            });
-            return callback(null, result);
-        }
-    });
+    Poll.findById(pollID,
+        {// only ask for the answers, other info are irrelevant
+            "answers.choice": true,
+            "answers.voteNbr": true
+        },
+        function(err, poll) {
+            if (err) {
+                return callback(err, null);
+            } else if(!poll) { // When there are no matches find() returns [], while findOne() & findById() returns null
+                var newError = new Error("No poll found");
+                return callback(newError, null);
+            }else {
+                var result = {
+                    "answers": [],
+                    "count": []
+                };
+
+                // return only the text answers and their number of votes
+                poll.answers.forEach(function(item) {
+                    result.answers.push(item.choice);
+                    result.count.push(item.voteNbr);
+                });
+                return callback(null, result);
+            }
+        });
 };
