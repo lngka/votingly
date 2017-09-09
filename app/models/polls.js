@@ -178,3 +178,32 @@ module.exports.anonymousVote = function(userIP, pollID, choiceIndex, callback) {
         }
     );
 };
+
+/*
+* @param pollID {string}: the string presentation of ObjectID, error if string can not be casted to objectID
+* @callback {function}: called after check with the following parameters: err, isDone
+*   @callback-param err {object}: An error instance representing the error during the execution
+*   @callback-param result {object}: current saved poll result
+*/
+
+module.exports.getResult = function(pollID, callback) {
+    Poll.findById(pollID, function(err, poll) {
+        if (err) {
+            return callback(err, null);
+        } else if(!poll) { // When there are no matches find() returns [], while findOne() & findById() returns null
+            var newError = new Error("No poll found");
+            return callback(newError, null);
+        }else {
+            var result = {
+                "answers": [],
+                "count": []
+            };
+
+            poll.answers.forEach(function(item) {
+                result.answers.push(item.choice);
+                result.count.push(item.voteNbr);
+            });
+            return callback(null, result);
+        }
+    });
+};

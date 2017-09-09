@@ -1,3 +1,5 @@
+
+/*eslint-disable no-unused-vars*/// this is imported to the front end
 function ready (callback) {
     if (typeof callback !== "function") {
         return;
@@ -9,5 +11,3 @@ function ready (callback) {
 
     document.addEventListener("DOMContentLoaded", callback, false);
 }
-
-module.exports = ready;

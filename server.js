@@ -16,6 +16,7 @@ const flash          = require("connect-flash");
 // import routers
 const indexRoute = require("./app/routes/index.js");
 const authRoute  = require("./app/routes/auth.js");
+const apiRoute  = require("./app/routes/api.js");
 
 // init environment
 dotenv.load();
@@ -78,8 +79,9 @@ app.use(function(req, res, next) {
 });
 
 // routes configuration
-indexRoute(app, passport);
+indexRoute(app);
 authRoute(app, passport);
+apiRoute(app);
 
 // start app
 var port = process.env.PORT;
