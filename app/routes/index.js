@@ -74,7 +74,8 @@ module.exports = function(app) {
                         "question": poll.question,
                         "author": poll.author,
                         "answers": poll.answers,
-                        "pollID": pollID
+                        "pollID": pollID,
+                        "css": "/public/css/poll.css"
                     };
                     res.render("poll", options);
                 }

@@ -74,6 +74,9 @@ app.use(function(req, res, next) {
 
 // expose user object to the view engine
 app.use(function(req, res, next) {
+    if (req.user && req.user.id == process.env.ANON_USER_ID) {
+        res.locals.anonymous = true;
+    }
     res.locals.user = req.user || null;
     next();
 });

@@ -5,13 +5,15 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="icon" href="/public/assets/favicon.ico">
-
     <title>Yet another voteApp</title>
-
     <!-- Bootstrap core CSS -->
     <link href="/public/css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom styles for this template -->
     <link href="/public/css/main.css" rel="stylesheet">
+    <!-- additional css -->
+    {{#if css}}
+    <link href={{css}} rel="stylesheet">
+    {{/if}}
   </head>
 
   <body>
@@ -35,8 +37,12 @@
                 <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Menu</a>
                 <div class="dropdown-menu" aria-labelledby="dropdown01">
                   <a class="dropdown-item" href="/create">Create new poll</a>
-                  <a class="dropdown-item" href="/mypolls">My polls</a>
                   <a class="dropdown-item" href="/allpolls">All polls</a>
+                  {{#if anonymous}}
+                  <a class="dropdown-item" href="#" data-toggle="tooltip" title="Registered users only" data-placement="right" disabled>My polls</a>
+                  {{else}}
+                  <a class="dropdown-item" href="/mypolls">My polls</a>
+                  {{/if}}
                 </div>
               </li>
 
@@ -55,7 +61,7 @@
       </div>
     </nav>
 
-    <div class="container-fluid">
+    <div class="container">
         {{#if error }}
             <div class="alert alert-danger fade show">
             <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
@@ -85,5 +91,11 @@
     <script src="/public/js/jquery-3.2.1.slim.min.js"></script>
     <script src="/public/js/tether.min.js"></script>
     <script src="/public/js/bootstrap.min.js"></script>
+    <!-- tooltip quickfix -->
+    <script>
+        $(document).ready(function(){
+            $('[data-toggle="tooltip"]').tooltip();
+        });
+    </script>
   </body>
 </html>

@@ -1,8 +1,9 @@
 <div class="jumbotron">
     <div class="row no-gutters">
-        <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+        <div class="col-12 col-sm-12 col-md-7 col-lg-6 col-xl-6">
             <p class="display-4">{{question}}</p>
             <p id="author">Created by: {{author}}</p>
+            <hr>
             <!-- the id of this form is used in chart.controllers.client.js to query data in order to draw chart-->
             <form class="form-group" action="/vote/{{pollID}}" id="{{pollID}}" method="get" enctype="application/x-www-form-urlencoded">
                 <div class="custom-controls-stacked">
@@ -17,8 +18,8 @@
                 <input class="btn btn-success" type="submit" value="Vote">
             </form>
         </div>
-        <div class="col-6 col-sm-6 col-md-4 col-lg-4 col-xl-3">
-            <canvas id="myChart"></canvas>
+        <div class="col-12 col-sm-12 col-md-5 col-lg-6 col-xl-6 chart-container">
+                <canvas id="myChart"></canvas>
         </div>
     </div>
 </div>
