@@ -9,5 +9,5 @@ function ready (callback) {
         return callback();
     }
 
-    document.addEventListener("DOMContentLoaded", callback, false);
+    document.addEventListener("DOMContentLoaded", callback);
 }

@@ -11,8 +11,13 @@ ready(function() {
 function drawChart(canvas,pollID) {
     // function ajaxRequest(method, url, requestObj, callback)
     ajaxRequest("GET","/api?q=getResult&pollID=" + pollID, null, function(result) {
-
         result = JSON.parse(result);
+        
+        // check if response is valid
+        if(!result.count.length) {
+            console.log(result);
+            return;
+        }
 
         // individual labels of each data entry
         var labels = result.answers;

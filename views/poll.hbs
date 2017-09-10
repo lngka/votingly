@@ -1,29 +1,29 @@
 <div class="jumbotron chart-poll-wrapper">
     <div class="row no-gutters">
-        <div class="col-12 col-sm-12 col-md-8 col-lg-8 col-xl-4">
+        <div class="col-12 col-sm-12 col-md-8 col-lg-8 col-xl-6">
             <p id="question" class="display-4">{{question}}</p>
             <p id="author">Created by: {{author}}</p>
             <hr>
             <!-- the id of this form is used in chart.controllers.client.js to query data in order to draw chart-->
-            <form class="form-group" action="/vote/{{pollID}}" id="{{pollID}}" method="get" enctype="application/x-www-form-urlencoded">
+            <form class="form-group" id="{{pollID}}" action="/vote/{{pollID}}" method="get" enctype="application/x-www-form-urlencoded">
                 <div class="custom-controls-stacked">
                 {{#each answers}}
                   <label class="custom-control custom-radio">
-                      <input name="choice" type="radio" class="custom-control-input" value="{{@index}}" required>
+                      <input name="choice" type="radio" class="custom-control-input choice" value="{{@index}}" required>
                       <span class="custom-control-indicator"></span>
                       <span id="choiceText" class="custom-control-description">{{this.choice}}</span>
                   </label>
                 {{/each}}
               </div>
               {{#if user}}
-                <input class="btn btn-success" type="submit" value="Vote">
+                <input id="voteBtn" class="btn btn-success" type="submit" value="Vote">
                 {{else}}
                 <a href="#" class="btn btn-success" value="Vote" data-toggle="tooltip" title="Login please!" disabled>Vote</a>
               {{/if}}
             </form>
         </div>
         <hr>
-        <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-5 chart-container">
+        <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 chart-container">
                 <canvas id="myChart"></canvas>
         </div>
     </div>
@@ -32,3 +32,4 @@
 <script type="text/javascript" src="/app/common/DOMready.js"></script>
 <script type="text/javascript" src="/app/common/ajaxFunctions.js"></script>
 <script type="text/javascript" src="/app/controllers/chart.controllers.client.js"></script>
+<script type="text/javascript" src="/app/controllers/vote.controller.client.js"></script>

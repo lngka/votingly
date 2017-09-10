@@ -16,15 +16,15 @@ function ajaxRequest(method, url, requestObj, callback) {
     xmlhttp.send(JSON.stringify(requestObj));
 }
 
-// used in chart.controllers.client.js
-function ajaxGET(url, callback) {
-    var xmlhttp = new XMLHttpRequest();
-    xmlhttp.onreadystatechange = function () {
-        if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
-            callback(xmlhttp.response);
-        }
-    };
-    // XMLHttpRequest.open(method, url, async)
-    xmlhttp.open("GET", url, true);
-    xmlhttp.send(null);
-}
+// // used in chart.controllers.client.js
+// function ajaxGET(url, callback) {
+//     var xmlhttp = new XMLHttpRequest();
+//     xmlhttp.onreadystatechange = function () {
+//         if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
+//             callback(xmlhttp.response);
+//         }
+//     };
+//     // XMLHttpRequest.open(method, url, async)
+//     xmlhttp.open("GET", url, true);
+//     xmlhttp.send(null);
+// }

@@ -27,6 +27,9 @@
           <li class="nav-item active">
             <a class="nav-link" href="/">Home</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/allpolls">All polls</a>
+          </li>
           {{#if user}}
               <li class="nav-item">
                 <a class="nav-link" href="/logout">Logout</a>
@@ -44,15 +47,12 @@
               </li>
 
               {{else}} <!--when user not logged in -->
-
+              
               <li class="nav-item">
                 <a class="nav-link" href="/register">Register</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="/login">Login</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/allpolls">All polls</a>
               </li>
            {{/if}} <!--end if user -->
 
