@@ -9,8 +9,8 @@ ready(function() {
 });
 
 function drawChart(canvas,pollID) {
-
-    ajaxGET("/api?q=getResult&pollID=" + pollID, function(result) {
+    // function ajaxRequest(method, url, requestObj, callback)
+    ajaxRequest("GET","/api?q=getResult&pollID=" + pollID, null, function(result) {
 
         result = JSON.parse(result);
 

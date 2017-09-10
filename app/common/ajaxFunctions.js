@@ -1,6 +1,7 @@
 
 /* eslint-disable no-unused-vars*/
-// ajaxSendJSON is included in create.hbs and used in create.sendRequest.client.js
+// used in create.sendRequest.client.js
+// used in chart.controllers.client.js
 function ajaxRequest(method, url, requestObj, callback) {
     var xmlhttp = new XMLHttpRequest();
 
