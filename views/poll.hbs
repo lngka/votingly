@@ -15,7 +15,11 @@
                   </label>
                 {{/each}}
               </div>
+              {{#if user}}
                 <input class="btn btn-success" type="submit" value="Vote">
+                {{else}}
+                <a href="#" class="btn btn-success" value="Vote" data-toggle="tooltip" title="Login please!" disabled>Vote</a>
+              {{/if}}
             </form>
         </div>
         <hr>

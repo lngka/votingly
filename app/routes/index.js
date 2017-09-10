@@ -62,7 +62,7 @@ module.exports = function(app) {
         });
 
     app.route("/poll/:pollID")
-        .get(checkAuthentication, function(req, res) {
+        .get(function(req, res) {
             const pollID = req.params.pollID;
             Poll.getPollByID(pollID, function(err, poll) {
                 if (err) {
