@@ -114,13 +114,18 @@ module.exports = function(app) {
                 req.flash("error", "Only for registered user");
                 return res.redirect("/");
             }
+
             Poll.getPollByUserID(userID, function(err, polls) {
                 if (err) {
                     req.flash("error", err.message);
-                    res.redirect("/");
-                } else {
-                    res.render("mypolls", {polls});
+                    return res.redirect("/");
                 }
+
+                if (polls.length == 0) {// When there are no matches Poll.getPollByUserID returns empty array
+                    req.flash("message", "You have no poll yet, create one here!");
+                    return res.redirect("/create");
+                }
+                return res.render("mypolls", {polls});
             });
         });
 

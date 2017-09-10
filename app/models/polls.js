@@ -93,10 +93,7 @@ module.exports.getPollByUserID = function(userID, callback) {
     Poll.find({"author": userID}, function(err, polls) {
         if (err) {
             return callback(err, null);
-        } else if(polls.length === 0){// When there are no matches find() returns [], while findOne() & findById() returns null
-            var newError = new Error("No poll found");
-            return callback(newError, null);
-        } else {
+        } else { // When there are no matches  find() returns [], while findOne() & findById() returns null
             return callback(null, polls);
         }
     });

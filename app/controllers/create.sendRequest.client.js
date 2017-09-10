@@ -41,6 +41,6 @@ submitBtn.addEventListener("click", function(event) {
     /*eslint-disable no-undef*/// ajaxRequest is defined in /app/common/ajaxFunctions
     // ajaxRequest(method, url, requestObj, callback)
     ajaxRequest("POST", url, requestObj, function() {
-        return location.reload();
+        return; // do nothing, page reload per server rerender anyway
     });
 });
