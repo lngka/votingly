@@ -1,7 +1,7 @@
 
 /* eslint-disable no-unused-vars*/
 // ajaxSendJSON is included in create.hbs and used in create.sendRequest.client.js
-function ajaxSendJSON(method, url, requestObj, callback) {
+function ajaxRequest(method, url, requestObj, callback) {
     var xmlhttp = new XMLHttpRequest();
 
     xmlhttp.onreadystatechange = function () {
@@ -10,7 +10,7 @@ function ajaxSendJSON(method, url, requestObj, callback) {
         }
     };
     // XMLHttpRequest.open(method, url, async)
-    xmlhttp.open(method, url, true);
+    xmlhttp.open(method, url, false);
     xmlhttp.setRequestHeader("Content-Type", "application/json; charset=UTF-8");
     xmlhttp.send(JSON.stringify(requestObj));
 }

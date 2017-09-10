@@ -53,10 +53,10 @@ module.exports = function(app) {
             Poll.createNewPoll(formData, req.user, function(err) {
                 if (err) {
                     req.flash("error", err.message);
-                    res.redirect("/create");
+                    res.render("create");
                 } else {
                     req.flash("success", "New poll created!!");
-                    res.redirect("/mypolls");
+                    res.render("create");
                 }
             });
         });

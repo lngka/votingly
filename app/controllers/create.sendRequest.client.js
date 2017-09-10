@@ -11,7 +11,7 @@ submitBtn.addEventListener("click", function(event) {
         return alert("Question invalid!");
     }
 
-    // forEach can not be called directly on choiceElements
+    // forEach can not be called directly from choiceElements
     // because choiceElements is NOT an Array, but HTMLcollection
     var regex = /\S+/i;
     var choicesArray = [];
@@ -27,7 +27,6 @@ submitBtn.addEventListener("click", function(event) {
         return alert("Allow at least two choices, please!");
     }
 
-
     // build request object
     var requestObj = {};
 
@@ -39,9 +38,9 @@ submitBtn.addEventListener("click", function(event) {
 
     // send the request
     var url = window.location.origin + "/create";
-    /*eslint-disable no-undef*/
-    // nonAjaxSendJSON is defined in app\common\nonAjaxFunctions.js
-    ajaxSendJSON("POST", url, requestObj, function(response) {
-        document.write(response);
+    /*eslint-disable no-undef*/// ajaxRequest is defined in /app/common/ajaxFunctions
+    // ajaxRequest(method, url, requestObj, callback)
+    ajaxRequest("POST", url, requestObj, function() {
+        return location.reload();
     });
 });
