@@ -2,3 +2,50 @@
     position: relative;
     max-width: 100%;
 }
+
+#question {
+    font-size: 2.5em;
+}
+
+#choiceText {
+    font-size: 1em;
+}
+
+.chart-poll-wrapper {
+  font-size: 10px;
+}
+
+/*xs Small devices (landscape phones, 400px and up)*/
+@media (min-width: 400px) {
+    .chart-poll-wrapper {
+        font-size: 10px;
+    }
+}
+
+/*sm Small devices (landscape phones, 576px and up)*/
+@media (min-width: 576px) {
+    .chart-poll-wrapper {
+        font-size: 14px;
+    }
+}
+
+/*md Medium devices (tablets, 768px and up)*/
+@media (min-width: 768px) {
+    .chart-poll-wrapper {
+        font-size: 14px;
+    }
+}
+
+/*lg Large devices (desktops, 992px and up)*/
+@media (min-width: 992px) {
+    .chart-poll-wrapper {
+        font-size: 13px;
+    }
+}
+
+/*xl Extra large devices (large desktops, 1200px and up)*/
+@media (min-width: 1200px) {
+    .chart-poll-wrapper {
+        font-size: 18px;
+    }
+}

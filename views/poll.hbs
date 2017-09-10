@@ -1,7 +1,7 @@
-<div class="jumbotron">
+<div class="jumbotron chart-poll-wrapper">
     <div class="row no-gutters">
-        <div class="col-12 col-sm-12 col-md-7 col-lg-6 col-xl-6">
-            <p class="display-4">{{question}}</p>
+        <div class="col-12 col-sm-12 col-md-8 col-lg-8 col-xl-4">
+            <p id="question" class="display-4">{{question}}</p>
             <p id="author">Created by: {{author}}</p>
             <hr>
             <!-- the id of this form is used in chart.controllers.client.js to query data in order to draw chart-->
@@ -11,7 +11,7 @@
                   <label class="custom-control custom-radio">
                       <input name="choice" type="radio" class="custom-control-input" value="{{@index}}" required>
                       <span class="custom-control-indicator"></span>
-                      <span class="custom-control-description">{{this.choice}}</span>
+                      <span id="choiceText" class="custom-control-description">{{this.choice}}</span>
                   </label>
                 {{/each}}
               </div>
@@ -23,7 +23,7 @@
             </form>
         </div>
         <hr>
-        <div class="col-12 col-sm-12 col-md-5 col-lg-6 col-xl-6 chart-container">
+        <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-5 chart-container">
                 <canvas id="myChart"></canvas>
         </div>
     </div>
