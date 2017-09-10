@@ -37,7 +37,6 @@
                 <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Menu</a>
                 <div class="dropdown-menu" aria-labelledby="dropdown01">
                   <a class="dropdown-item" href="/create">Create new poll</a>
-                  <a class="dropdown-item" href="/allpolls">All polls</a>
                   {{#if anonymous}}
                   <a class="dropdown-item" href="#" data-toggle="tooltip" title="Registered users only" data-placement="right" disabled>My polls</a>
                   {{else}}
@@ -54,7 +53,9 @@
               <li class="nav-item">
                 <a class="nav-link" href="/login">Login</a>
               </li>
-
+              <li class="nav-item">
+                <a class="nav-link" href="/allpolls">All polls</a>
+              </li>
            {{/if}} <!--end if user -->
 
         </ul>

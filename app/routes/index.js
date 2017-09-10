@@ -130,13 +130,17 @@ module.exports = function(app) {
         });
 
     app.route("/allpolls")
-        .get(checkAuthentication, function(req, res) {
+        .get(function(req, res) {
             Poll.find({}, function(err, polls) {
                 if (err) {
                     req.flash("error", err.message);
                     res.redirect("/");
                 } else {
-                    res.render("allPolls", {polls});
+                    var options = {
+                        "polls": polls,
+                        "css": "/public/css/allPolls.css"
+                    };
+                    res.render("allPolls", options);
                 }
             });
         });
