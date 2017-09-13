@@ -18,7 +18,7 @@ ready(function() {
 
         // prevent sending request if parsed form data is empty
         if (!formJSON.hasOwnProperty("choice")) {
-            return alert("Please pick one answer");
+            return alert("Nope!");
         } else {
             // build request url, that is, top level address + /vote/{pollID}?choice={user selected choice index}
             var url = voteForm.action + "?choice=" + formJSON.choice;
@@ -26,7 +26,7 @@ ready(function() {
 
             // ajaxRequest(method, url, requestObj, callback)
             ajaxRequest("GET", url, null, function() {
-                location.reload();
+                updateChart();
             });
         }
     });

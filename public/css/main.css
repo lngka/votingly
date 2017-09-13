@@ -1,7 +1,9 @@
 body {
   padding-top: 10rem;
   background-color: #F5EEF8;
+  background-image: url("/public/assets/ehud-neuhaus-298628.jpg");
 }
+
 .starter-template {
   padding: 3rem 1.5rem;
   text-align: center;
