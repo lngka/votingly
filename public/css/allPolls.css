@@ -1,15 +1,30 @@
-.cardblocks-wrapper {
-    padding-top: -10px;
-    margin-bottom: 10vh;
-    margin-left: auto;
-    margin-right: auto;
-}
-.card-block {
-    padding: 0px;
-    padding-left: 1%;
-}
+
 
 .card {
-    margin-top: 3px;
-    margin-bottom: 3px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    background: white;
+}
+
+.card-title {
+    font-weight: 600;
+    font-size: 1.2rem;
+}
+
+.btn {
+    display: block;
+    width: 100%;
+    color: #283747;
+    border-color: rgba(197, 202, 233, 1);
+}
+
+.btn:hover{
+    color: black;
+    background-color: rgba(197, 202, 233, 0.5);
+    border-color: rgba(197, 202, 233, 1);
+}
+
+.voteIcon {
+    max-width: 50px;
+    max-height: 40px;
 }
