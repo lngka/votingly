@@ -15,14 +15,14 @@
     <link href={{css}} rel="stylesheet">
     {{/if}}
   </head>
-
   <body>
+      <!-- navbar's configuration -->
     <nav class="navbar navbar-toggleable-md navbar-inverse bg-inverse fixed-top">
-      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarsCollapseWrapper" aria-controls="navbarsCollapseWrapper" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <a class="navbar-brand" href="#"><img id="logo" src="/public/assets/logo.w5" alt="logo"></a>
-      <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+      <div class="collapse navbar-collapse" id="navbarsCollapseWrapper">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
             <a class="nav-link" href="/">Home</a>
@@ -45,9 +45,7 @@
                   {{/if}}
                 </div>
               </li>
-
               {{else}} <!--when user not logged in -->
-              
               <li class="nav-item">
                 <a class="nav-link" href="/register">Register</a>
               </li>
@@ -55,12 +53,14 @@
                 <a class="nav-link" href="/login">Login</a>
               </li>
            {{/if}} <!--end if user -->
-
         </ul>
       </div>
     </nav>
 
+
+    <!-- main content's container -->
     <div class="container">
+        <!-- area for flash messages -->
         {{#if error }}
             <div class="alert alert-danger fade show">
             <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
@@ -79,17 +79,22 @@
                 <strong>Info!</strong> {{message}}
             </div>
         {{/if}}
-
+        <!-- body placeholder, content comes from individual template -->
         {{{body}}}
-    </div><!-- /.container -->
-
+    </div><!-- end container -->
+    <!-- footer & credits -->
+    <footer class="footer">
+      <div class="container">
+        <span class="text-muted font-italic">by <a href="https://github.com/lngka/votingly">lngka</a></span>
+      </div>
+    </footer>
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="/public/js/jquery-3.2.1.slim.min.js"></script>
     <script src="/public/js/tether.min.js"></script>
     <script src="/public/js/bootstrap.min.js"></script>
-    <!-- enalble tooltip script -->
+    <!-- tooltip enabling script -->
     <script src="/public/js/bootstrap.tooltips.enabler.js"></script>
   </body>
 </html>

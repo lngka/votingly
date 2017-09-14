@@ -6,7 +6,7 @@ module.exports = function(app) {
         .get(function(req, res){
             // checkAuthentication middleware not used to avoid unnecessary flash message to user
             if (!req.isAuthenticated()) {
-                res.render("login");
+                res.redirect("/login");
             } else {
                 res.render("home");
             }
@@ -14,7 +14,10 @@ module.exports = function(app) {
 
     app.route("/login")
         .get(function(req, res){
-            res.render("login");
+            var options = {
+                "css": "/public/css/login.css"
+            };
+            res.render("login", options);
         });
 
     app.route("/logout")
