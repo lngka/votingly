@@ -1,0 +1,8 @@
+.create-form-wrapper {
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 4vh;
+    padding-bottom: 6vh;
+    border-radius: 10px;
+    background: rgba(197, 202, 233, 0.5);
+}

@@ -29,7 +29,10 @@ module.exports = function(app) {
 
     app.route("/register")
         .get(function(req, res) {
-            res.render("register");
+            var options = {
+                "css": "/public/css/register.css"
+            };
+            res.render("register", options);
         })
         .post(function(req, res) {
             var username = req.body.username;
@@ -48,18 +51,26 @@ module.exports = function(app) {
 
     app.route("/create")
         .get(checkAuthentication, function(req, res) {
-            res.render("create");
+            var options = {
+                "css": "/public/css/create.css"
+            };
+            res.render("create", options);
         })
         .post(function(req, res) {
             var formData = req.body;
 
             Poll.createNewPoll(formData, req.user, function(err) {
+                // options object to include the css file to render create.hbs
+                var options = {
+                    "css": "/public/css/create.css"
+                };
+
                 if (err) {
                     req.flash("error", err.message);
-                    res.render("create");
+                    res.render("create", options);
                 } else {
                     req.flash("success", "New poll created!!");
-                    res.render("create");
+                    res.render("create", options);
                 }
             });
         });

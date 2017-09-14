@@ -59,19 +59,19 @@
     <div class="container">
         <!-- area for flash messages -->
         {{#if error }}
-            <div class="alert alert-danger fade show">
+            <div class="alert alert-danger fade show col-6 mx-auto">
             <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
               <strong>Error!</strong> {{error}}
             </div>
         {{/if}}
         {{#if success }}
-            <div class="alert alert-success fade show">
+            <div class="alert alert-success fade show col-6 mx-auto">
               <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
               <strong>Success!</strong> {{success}}
             </div>
         {{/if}}
         {{#if message}}
-            <div class="alert alert-info fade show">
+            <div class="alert alert-info fade show col-6 mx-auto">
                 <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                 <strong>Info!</strong> {{message}}
             </div>
