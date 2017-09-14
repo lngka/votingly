@@ -1,10 +1,12 @@
-<div class="card cardblocks-wrapper">
-    <hr>
+<div class="cardblocks-wrapper col-12 col-sm-8 col-md-8 col-lg-8 col-xl-8">
     {{#each polls}}
-    <div class="card-block">
-      <a href="{{this.pollURL}}"><p class="card-text">{{this.question}}</p></a>
-      <span class="badge badge-info">Vote count: {{this.participants.length}}</span>
-      <hr>
+    <div class="card">
+        <div class="card-block">
+          <a href="{{this.pollURL}}"><p class="card-text">{{this.question}}</p></a>
+          <span class="badge badge-info">Vote count: {{this.participants.length}}</span>
+        </div>
+
     </div>
+
     {{/each}}
 </div>

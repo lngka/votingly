@@ -8,7 +8,7 @@ module.exports = function(app) {
             if (!req.isAuthenticated()) {
                 res.redirect("/login");
             } else {
-                res.render("home");
+                res.render("dashboard");
             }
         });
 
