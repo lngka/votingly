@@ -1,12 +1,14 @@
-<div class="login-form-wrapper col-md-6">
+<div class="login-form-wrapper col-12 col-sm-8 col-md-4 col-lg-4 col-xl-4">
     <form action="/auth/local" class="form" role="form" autocomplete="off" id="formLogin" method="post">
+        <div class="text-center display-4">
+            Login
+        </div>
+        <br>
         <div class="form-group">
-            <label for="uname1">Username: </label>
-            <input type="text" class="form-control" name="username" id="username" required=>
+            <input type="text" class="form-control" name="username" id="username" placeholder="Username" required=>
         </div>
         <div class="form-group">
-            <label>Password: </label>
-            <input type="password" class="form-control" name="password" id="password" required>
+            <input type="password" class="form-control" name="password" id="password" placeholder="Password" required>
         </div>
         <button type="submit" class="btn btn-success float-right">Login</button>
         <a href="/auth/anonymous" class="btn btn-danger float-right">Man, I'm high/lazy</a>

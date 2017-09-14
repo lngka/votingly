@@ -1,9 +1,11 @@
 html {
+
   position: relative;
   min-height: 100%;
 }
 body {
   padding-top: 10rem;
+  font-family: "Open Sans", sans-serif;
   background: url("/public/assets/background-2730506_1280.jpg") center no-repeat fixed;
   background-size: cover;
   /* Margin bottom by footer height */
@@ -14,7 +16,6 @@ body {
      background-color: #222 !important;
      border-color: #080808 !important;
 }
-
 
 #logo{
     width: 100px;
@@ -37,4 +38,11 @@ a[disabled], a[disabled]:hover {
   line-height: 5vh; /* Vertically center the text there */
   background-color: #222;
   border-color: #080808;
+}
+
+@font-face {
+    font-family: "Open Sans";
+    font-weight: 400;
+    font-style: normal;
+    src: url("/public/font/open_sans/OpenSans-Regular.ttf");
 }

@@ -1,6 +1,7 @@
 .login-form-wrapper {
     margin-left: auto;
     margin-right: auto;
-    background-color: white;
-    padding-bottom: 6vh;
+    padding-top: 4vh;
+    padding-bottom: 8vh;
+    border-radius: 10px;
 }
