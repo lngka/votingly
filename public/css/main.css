@@ -1,5 +1,4 @@
 html {
-
   position: relative;
   min-height: 100%;
 }
@@ -18,7 +17,7 @@ body {
 }
 
 #logo{
-    width: 100px;
+    width: 20px;
     height: auto;
     display: flex;
 }

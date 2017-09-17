@@ -5,12 +5,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="icon" href="/public/assets/favicon.ico">
-    <title>Yet another voteApp</title>
+    <title>Votinglee</title>
     <!-- Bootstrap core CSS -->
     <link href="/public/css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom styles for this template -->
     <link href="/public/css/main.css" rel="stylesheet">
-    <!-- additional css -->
+    <!-- additional css, {"css": <path to css file>} is passed to hbs at rendering -->
     {{#if css}}
     <link href={{css}} rel="stylesheet">
     {{/if}}
@@ -21,7 +21,7 @@
       <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarsCollapseWrapper" aria-controls="navbarsCollapseWrapper" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <a class="navbar-brand" href="#"><img id="logo" src="/public/assets/logo.w5" alt="logo"></a>
+      <a class="navbar-brand" href="#"><img id="logo" src="/public/assets/logo_noText.png" alt="logo"></a>
       <div class="collapse navbar-collapse" id="navbarsCollapseWrapper">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
@@ -67,7 +67,7 @@
         {{#if success }}
             <div class="alert alert-success fade show col-6 mx-auto">
               <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-              <strong>Success!</strong> {{success}}
+              <stron100g>Success!</strong> {{success}}
             </div>
         {{/if}}
         {{#if message}}
@@ -79,6 +79,7 @@
         <!-- body placeholder, content comes from individual template -->
         {{{body}}}
     </div><!-- end container -->
+
     <!-- footer & credits -->
     <footer class="footer">
       <div class="container">

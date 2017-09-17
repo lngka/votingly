@@ -20,7 +20,22 @@ module.exports = function(app, passport) {
             // persistent login for this user require "manual" writting in session.passport object
             // because Anonymous is logged via this route, NOT through the browser's login form
             req.session.passport = {"user": {"_id": process.env.ANON_USER_ID}};
-            req.flash("success", "Logged in anonymously, your personality still the same though");
+            req.flash("success", "I logged you in anonymously, lazy slacker");
             res.redirect("/allpolls");
+        });
+
+    app.route("/login")
+        .get(function(req, res){
+            var options = {
+                "css": "/public/css/login.css"
+            };
+            res.render("login", options);
+        });
+
+    app.route("/logout")
+        .get(function(req, res) {
+            req.logout();
+            req.flash("message", "Thank you, come again");
+            res.redirect("login");
         });
 };
