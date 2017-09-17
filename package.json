@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/lngka/votingly.git"
+    "url": "git+https://github.com/lngka/my-boilerplate.git"
   },
   "keywords": [
     "nodejs",
@@ -22,9 +22,9 @@
   "author": "lngka",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/lngka/votingly/issues"
+    "url": "https://github.com/lngka/my-boilerplate/issues"
   },
-  "homepage": "https://github.com/lngka/votingly.git",
+  "homepage": "https://github.com/lngka/my-boilerplate#readme",
   "dependencies": {
     "babel-eslint": "^7.2.3",
     "bcryptjs": "^2.4.3",
