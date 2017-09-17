@@ -40,7 +40,9 @@ submitBtn.addEventListener("click", function(event) {
     var url = window.location.origin + "/create";
     /*eslint-disable no-undef*/// ajaxRequest is defined in /app/common/ajaxFunctions
     // ajaxRequest(method, url, requestObj, callback)
-    ajaxRequest("POST", url, requestObj, function() {
+    ajaxRequest("POST", url, requestObj, function(response) {
+        console.log(response);
+        window.location.replace("/create");
         return; // do nothing, page reload per server rerender anyway
     });
 });
