@@ -60,17 +60,13 @@ module.exports = function(app) {
             var formData = req.body;
 
             Poll.createNewPoll(formData, req.user, function(err) {
-                // options object to include the css file to render create.hbs
-                var options = {
-                    "css": "/public/css/create.css"
-                };
-
+                // client script redirect itself to /create, flash messages still need to be set for web view
                 if (err) {
                     req.flash("error", err.message);
-                    res.render("create", options);
+                    res.status(500).send(err.message);
                 } else {
                     req.flash("success", "New poll created!!");
-                    res.render("create", options);
+                    res.status(200).send("New poll created!!");
                 }
             });
         });
