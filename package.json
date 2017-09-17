@@ -4,11 +4,12 @@
   "description": "standard nodejs boilerplate with mongoose, handlebar, passport, bootstrap",
   "main": "server.js",
   "scripts": {
+    "start": "node server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/lngka/my-boilerplate.git"
+    "url": "git+https://github.com/lngka/votingly.git"
   },
   "keywords": [
     "nodejs",
@@ -21,9 +22,9 @@
   "author": "lngka",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/lngka/my-boilerplate/issues"
+    "url": "https://github.com/lngka/votingly/issues"
   },
-  "homepage": "https://github.com/lngka/my-boilerplate#readme",
+  "homepage": "https://github.com/lngka/votingly.git",
   "dependencies": {
     "babel-eslint": "^7.2.3",
     "bcryptjs": "^2.4.3",
