@@ -178,7 +178,7 @@ module.exports = function(app) {
                         req.flash("error", err.message);
                         return res.redirect("back");
                     } else {
-                        req.flash("success", "It is, like, *your* opinion");
+                        req.flash("success", "Nice, thanks for the opinion");
                         return res.redirect("back");
                     }
                 });
