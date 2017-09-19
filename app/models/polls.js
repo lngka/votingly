@@ -122,16 +122,6 @@ module.exports.vote = function(userID, pollID, choiceIndex, callback) {
     // access the choiceIndex-th element of the "answers" array
     // that is, if choiceIndex is 2 then we need to find and update answers.2
     var whereToVote = "answers" + "." + choiceIndex;
-    Poll.findOne({"_id": pollID, "participants" : userID}, "_id", function(err, poll) {
-        if (err) {
-            return callback(err, null);
-        }
-
-        if (!poll) {
-            var newErr = new Error("You have already voted in this poll");
-            return callback(newErr, null);
-        }
-    });
     Poll.findOneAndUpdate({"_id": pollID},
         // Note the square brackets around key. These are called computed property names.
         // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Object_initializer#Computed_property_names

@@ -156,7 +156,7 @@ module.exports = function(app) {
         });
 
     app.route("/vote/:pollID")
-        .get(checkAuthentication, checkAlreadyVoted, function(req, res) {
+        .post(checkAuthentication, checkAlreadyVoted, function(req, res) {
             var userID = req.user.id;
             var pollID = req.params.pollID;
             var choiceIndex = req.query.choice;
@@ -168,7 +168,7 @@ module.exports = function(app) {
                         req.flash("error", err.message);
                         return res.redirect("back");
                     } else {
-                        req.flash("success", "It is, like, *your* opinion");
+                        req.flash("success", "Thanks for the opinion");
                         return res.redirect("back");
                     }
                 });
@@ -176,10 +176,12 @@ module.exports = function(app) {
                 Poll.vote(userID, pollID, choiceIndex, function(err) {
                     if (err) {
                         req.flash("error", err.message);
-                        return res.redirect("back");
+                        console.log(err);
+                        console.log(err.message);
+                        return res.status(502).send("Vote failed!");
                     } else {
-                        req.flash("success", "Nice, thanks for the opinion");
-                        return res.redirect("back");
+                        req.flash("success", "Thanks for the opinion");
+                        return res.status(200).send("Voted successfully!");
                     }
                 });
             }
@@ -206,7 +208,7 @@ module.exports = function(app) {
             }, function(err, count) {
                 if (count) {
                     req.flash("error", "You already voted on this poll");
-                    res.redirect("back");
+                    res.status(409).send("Your vote already exists");
                 } else {
                     next();
                 }

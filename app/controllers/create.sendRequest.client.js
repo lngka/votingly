@@ -43,6 +43,5 @@ submitBtn.addEventListener("click", function(event) {
     ajaxRequest("POST", url, requestObj, function(response) {
         console.log(response);
         window.location.replace("/create");
-        return; // do nothing, page reload per server rerender anyway
     });
 });

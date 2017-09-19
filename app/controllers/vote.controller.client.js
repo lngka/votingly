@@ -25,8 +25,12 @@ ready(function() {
             console.log(url);
 
             // ajaxRequest(method, url, requestObj, callback)
-            ajaxRequest("GET", url, null, function() {
+            ajaxRequest("POST", url, {}, function(response) {
                 updateChart();
+                console.log(response.statusCode);
+                console.log(window.location.href);
+                console.log(voteForm.action);
+                window.location.replace(window.location.href);
             });
         }
     });
