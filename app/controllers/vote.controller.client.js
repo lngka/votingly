@@ -27,9 +27,6 @@ ready(function() {
             // ajaxRequest(method, url, requestObj, callback)
             ajaxRequest("POST", url, {}, function(response) {
                 updateChart();
-                console.log(response.statusCode);
-                console.log(window.location.href);
-                console.log(voteForm.action);
                 window.location.replace(window.location.href);
             });
         }
